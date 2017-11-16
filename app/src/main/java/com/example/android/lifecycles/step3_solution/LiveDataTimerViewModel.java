@@ -39,12 +39,14 @@ public class LiveDataTimerViewModel extends ViewModel {
         mInitialTime = SystemClock.elapsedRealtime();
         Timer timer = new Timer();
 
-        // Update the elapsed time every second.
+        /** 매 초마다 경과시간을 업데이트 합니다. */
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 final long newValue = (SystemClock.elapsedRealtime() - mInitialTime) / 1000;
-                // setValue() cannot be called from a background thread so post to main thread.
+
+                /** setValue() 백그라운드 스레드에서 호출하기 때문에 메인스레드에서 게시할 수 없습니다.*/
+                //TODO 새로운 값을 LiveData.postValue()로 작성하세요.
                 mElapsedTime.postValue(newValue);
             }
         }, ONE_SECOND, ONE_SECOND);

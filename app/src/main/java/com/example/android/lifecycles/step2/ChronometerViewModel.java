@@ -28,6 +28,8 @@ public class ChronometerViewModel extends ViewModel {
     @Nullable
     private Long mStartTime;
 
+    /** ViewModel을 extends하고, getter 방식을 사용하여 사용할 변수를 캡슐화 합니다. */
+
     @Nullable
     public Long getStartTime() {
         return mStartTime;

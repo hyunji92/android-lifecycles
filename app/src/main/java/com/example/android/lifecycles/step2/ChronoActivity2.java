@@ -31,21 +31,21 @@ public class ChronoActivity2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // The ViewModelStore provides a new ViewModel or one previously created.
+        /** ViewModelStore는 새로운 ViewModel 또는 이전에 작성된 ViewModel을 제공합니다. */
         ChronometerViewModel chronometerViewModel
                 = ViewModelProviders.of(this).get(ChronometerViewModel.class);
 
-        // Get the chronometer reference
+
+        /**매트로놈의 reference를 가져옵니다.*/
         Chronometer chronometer = findViewById(R.id.chronometer);
 
         if (chronometerViewModel.getStartTime() == null) {
-            // If the start date is not defined, it's a new ViewModel so set it.
+            /** 시작 날짜가 정의되어 있지 않았다면 새로운 ViewModel이므로, ViewModel을 설정하세요. */
             long startTime = SystemClock.elapsedRealtime();
             chronometerViewModel.setStartTime(startTime);
             chronometer.setBase(startTime);
         } else {
-            // Otherwise the ViewModel has been retained, set the chronometer's base to the original
-            // starting time.
+            /**기존의 ViewModel이 있다면 ViewModel이 유지되고, 매트로놈 기준을 startTime으로 설정합니다.*/
             chronometer.setBase(chronometerViewModel.getStartTime());
         }
 

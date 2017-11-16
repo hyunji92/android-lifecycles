@@ -53,6 +53,8 @@ public class ChronoActivity3 extends AppCompatActivity {
             }
         };
 
-        //TODO: observe the ViewModel's elapsed time
+        //TODO: 여기서 ViewModel의 경과 시간을 관찰할 수 있습니다.
+        mLiveDataTimerViewModel.getElapsedTime().observe(this, elapsedTimeObserver);
+
     }
 }
