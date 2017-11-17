@@ -42,14 +42,12 @@ public class BoundLocationManager {
                                      LocationListener listener, Context context) {
             mContext = context;
             mListener = listener;
+            /** 라이프 사이클의 변경에 따라 라이프사이클을 관찰하도록 observer 코드*/
             lifecycleOwner.getLifecycle().addObserver(this);
         }
 
         @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
         void addLocationListener() {
-            // Note: Use the Fused Location Provider from Google Play Services instead.
-            // https://developers.google.com/android/reference/com/google/android/gms/location/FusedLocationProviderApi
-
             mLocationManager =
                     (LocationManager) mContext.getSystemService(Context.LOCATION_SERVICE);
             mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, mListener);

@@ -20,6 +20,7 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -34,6 +35,7 @@ public class LocationActivity extends AppCompatActivity {
     private static final int REQUEST_LOCATION_PERMISSION_CODE = 1;
 
     private LocationListener mGpsListener = new MyLocationListener();
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
@@ -66,6 +68,21 @@ public class LocationActivity extends AppCompatActivity {
         } else {
             bindLocationListener();
         }
+    }
+
+    /** [기존] 액티비티나 프래그먼트의 생명주기에 따른 작업을 수행하고 싶을때 오버라이드 해야하는 생명주기 메서드 */
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, mListener);
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // mLocationManager.removeUpdates(mListener);
+
     }
 
     private class MyLocationListener implements LocationListener {

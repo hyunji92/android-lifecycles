@@ -41,12 +41,13 @@ public class BoundLocationManager {
                                      LocationListener listener, Context context) {
             mContext = context;
             mListener = listener;
-            //TODO: Add lifecycle observer
+            //TODO: lifecycle observer를 추가합니다.
+            lifecycleOwner.getLifecycle().addObserver(this);
         }
 
-        //TODO: Call this on resume
+        //TODO: 여기서 resume 상태를 호출할 수 있도록 합니다.
         void addLocationListener() {
-            // Note: Use the Fused Location Provider from Google Play Services instead.
+            // Note: 아래 주소의 FusedLocationProvider를 사용하도록 합니다
             // https://developers.google.com/android/reference/com/google/android/gms/location/FusedLocationProviderApi
 
             mLocationManager =
@@ -54,7 +55,7 @@ public class BoundLocationManager {
             mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, mListener);
             Log.d("BoundLocationMgr", "Listener added");
 
-            // Force an update with the last location, if available.
+            // 가능한 경우 마지막으로 강제 업데이트하는 코드
             Location lastLocation = mLocationManager.getLastKnownLocation(
                     LocationManager.GPS_PROVIDER);
             if (lastLocation != null) {
@@ -62,7 +63,7 @@ public class BoundLocationManager {
             }
         }
 
-        //TODO: Call this on pause
+        //TODO: pause 상태를 홀출할 수 있도록합니다.
         void removeLocationListener() {
             if (mLocationManager == null) {
                 return;
